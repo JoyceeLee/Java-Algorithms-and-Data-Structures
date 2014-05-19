@@ -9,7 +9,9 @@ public class Solution {
         int sing = A[0];
         if(len>1)
         {
+            for(int i = 1;i<len;i++)
             {
+                sing = sing ^ A[i]; // "^"
             }
         }
         return sing;
