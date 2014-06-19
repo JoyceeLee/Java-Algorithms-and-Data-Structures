@@ -55,6 +55,7 @@ public class Solution {
           curLevel.clear();
         }
       }
+      Collections.reverse(ret);
       return ret;
     }
 }
