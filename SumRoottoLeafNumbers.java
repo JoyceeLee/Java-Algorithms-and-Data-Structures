@@ -32,7 +32,7 @@ public class Solution {
             return 0; 
         }
         tmp = tmp*10 + root.val;
-        tmp = root.left==null && root.right==null ? dfs(root.left, tmp) : dfs(root.right, tmp);
+        tmp = root.left==null && root.right==null ? tmp : dfs(root.left, tmp) + dfs(root.right, tmp);
         return tmp;
     }
 }
