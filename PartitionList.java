@@ -36,7 +36,7 @@ public class Solution {
             } else {
                 if(preright == null) {
                     preright = head;
-                    rightleft = preright;
+                    rightrun = preright;
                 } else {
                     rightrun.next = head;
                     rightrun = rightrun.next;
