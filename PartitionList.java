@@ -42,8 +42,10 @@ public class Solution {
                     rightrun = rightrun.next;
                 }
             }
+            head = head.next;
         }
-        rightrun.next = null;
+        if(preright!=null) 
+            rightrun.next = null;
         if(preleft==null) {
             return preright;
         } else {
