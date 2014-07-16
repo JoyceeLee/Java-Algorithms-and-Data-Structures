@@ -6,9 +6,10 @@
 * dict = ["leet", "code"].
 * 
 * Return true because "leetcode" can be segmented as "leet code".
-* /
+*/
 
 
+// Solution 1
 public class Solution {
     public boolean wordBreak(String s, Set<String> dict) {
         int len = s.length();
@@ -24,5 +25,26 @@ public class Solution {
             }
         }
         return dp[0];
+    }
+}
+
+
+// Solution 2 -- Time Limit Exceed
+public class Solution {
+    public boolean wordBreak(String s, Set<String> dict) {
+        if(dict.contains(s))
+            return true;
+            int len = s.length();
+        for(int i=1; i<len; i++) {
+            String firstPart = s.substring(0,i);
+            if(dict.contains(firstPart) == true){
+                String remainPart = s.substring(i,length);
+                boolean result = wordBreak(remainPart, dict);
+                if(result == true){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
