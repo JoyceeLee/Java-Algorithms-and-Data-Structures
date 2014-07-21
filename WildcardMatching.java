@@ -20,6 +20,7 @@
 */
 
 // Solution 1> brute force (time limit exceed)
+// Time Complexity : explonential
 public class Solution {
 	public static boolean isMatch(String s, String p) {
         return helper(s, p, 0, 0);
@@ -49,6 +50,7 @@ public class Solution {
 *  as we only have to know if the former i characters match former j-1 chars when calculate 'i with j',
 *  so 1 dim array is enough
 */
+// Time Complexity : O(m*n)
 public class Solution {
     public boolean isMatch(String s, String p) {
         if(p.length()==0)
@@ -76,6 +78,7 @@ public class Solution {
 }
 
 // Solution 3>
+// Time Complexity : O(m*n)
 public class Solution {
     public boolean isMatch(String s, String p) {
         int i = 0;
