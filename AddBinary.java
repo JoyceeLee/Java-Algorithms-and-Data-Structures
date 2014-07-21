@@ -5,7 +5,7 @@
 * a = "11"
 * b = "1"
 * Return "100".
-* /
+*/
 
 
 public class Solution {
