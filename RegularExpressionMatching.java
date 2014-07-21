@@ -28,6 +28,10 @@
 */
 
 // Solution 1> Brute Force (recursion)
+/* 
+* Time Complexity : T(n) = O(2^n)， worst case
+* T(n) = T(n-1) + ... + T(1)
+*/
 public class Solution {
     public boolean isMatch(String s, String p) {
         return helper(s, p, 0, 0);
@@ -36,13 +40,14 @@ public class Solution {
         if(j==p.length()) return i==s.length();
         
         if(j==p.length()-1 || p.charAt(j+1)!='*') {
-            if(i == s.length() || (s.charAt(i)!=p.charAt(j) && p.charAt(j)!='.') )
+            if(i==s.length() || (s.charAt(i)!=p.charAt(j) && p.charAt(j)!='.') )
                 return false;
-            else return helper(s, p, i+1, j+1);
+            return helper(s, p, i+1, j+1);
         } 
         
         if(helper(s, p, i, j+2)) // "x*" matches nothing at position j
                 return true;
+                
         while(i<s.length() && (p.charAt(j)=='.' || s.charAt(i)==p.charAt(j)) ) {
             if(helper(s, p, i+1, j+2))
                 return true;
@@ -54,6 +59,10 @@ public class Solution {
 }
 
 // Solution 2> Dynamic Programming
+/* 
+* Time Complexity : O(m*n)
+* Space Complexity : O(m*n)
+*/
 public class Solution {
     public boolean isMatch(String s, String p) {  
         if(p.length()==0)  
