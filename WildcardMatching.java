@@ -110,4 +110,22 @@ public class Solution {
         return j==p.length();
     }
 }
+
+/**
+ * for test
+ * public static void main(String[] args) {
+     	String s = "abbabbaabaaabbbbbabbabbabbbabbaaabbbabaa";
+   	String p = "*aabb***aa**a******aa*";
+    	System.out.println(s.length()+", "+p.length());
+    	
+    	if(isMatch(s, p))
+    		System.out.println("match !");
+    	else System.out.println("not match !");
+    	if(isMatch2(s, p))
+    		System.out.println("match2 !");
+    	else System.out.println("not match2 !");
+    	if(isMatch3(s, p))
+    		System.out.println("match3 !");
+    	else System.out.println("not match3 !");
     }
+ */
