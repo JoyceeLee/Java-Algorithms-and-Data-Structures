@@ -11,7 +11,7 @@
 * A solution set is:
 * [7]
 * [2, 2, 3]
-* /
+*/
 
 public class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
