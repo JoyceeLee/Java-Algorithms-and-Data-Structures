@@ -12,7 +12,10 @@
  * If there are multiple such windows, you are guaranteed that there will always be only one unique minimum window in S.
  */
 
-
+/**
+ * Time Complexity : O(S.length())
+ * Space Complexity : O(T.length())
+ */
 public class Solution {
     public String minWindow(String S, String T) {
         if(S==null || T==null || S.length()==0 || T.length()==0) {
