@@ -11,7 +11,11 @@
  * (order does not matter).
  */
 
-
+/**
+ * Time Complexity : 每次扫描的时间复杂度是O(2*n/l) (每个单词不会被访问多于两次，一次是窗口右端，一次是窗口左端)，
+ * 总共扫描l次（i=0, ..., l-1)，所以总复杂度是O(2*n/l*l)=O(n)
+ * Space Complexity : O(m*l), m 是字典中单词数量
+ */
 public class Solution {
     public ArrayList<Integer> findSubstring(String S, String[] L) {
         ArrayList<Integer> ret = new ArrayList<Integer>();
