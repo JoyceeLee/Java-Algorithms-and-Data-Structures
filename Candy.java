@@ -1,15 +1,15 @@
 /**
-There are N children standing in a line. Each child is assigned a rating value.
-
-You are giving candies to these children subjected to the following requirements:
-
-Each child must have at least one candy.
-Children with a higher rating get more candies than their neighbors.
-What is the minimum candies you must give?
-
-tips : higher, so equals could be 0
-e.g. ratings = {2, 1, 1, 0}, candy = {1, 0, 1, 0}
-       ratings = {0, 1, 1, 2}, candy = {0, 1, 0, 1}
+ * There are N children standing in a line. Each child is assigned a rating value.
+ * 
+ * You are giving candies to these children subjected to the following requirements:
+ * 
+ * Each child must have at least one candy.
+ * Children with a higher rating get more candies than their neighbors.
+ * What is the minimum candies you must give?
+ * 
+ * tips : higher, so equals could be 0
+ * e.g. ratings = {2, 1, 1, 0}, candy = {1, 0, 1, 0}
+ *      ratings = {0, 1, 1, 2}, candy = {0, 1, 0, 1}
 */
 
 
