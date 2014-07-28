@@ -12,6 +12,10 @@
  *     Point(int a, int b) { x = a; y = b; }
  * }
  */
+/**
+ * Time Complexity : O(n^2)
+ * Space Complexity : O(n)
+ */
 public class Solution {
     public int maxPoints(Point[] points) {
         if(points==null || points.length==0)
