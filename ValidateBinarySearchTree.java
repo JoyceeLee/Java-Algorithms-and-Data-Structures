@@ -16,14 +16,54 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+Solution 1 Recursion
 public class Solution {
     public boolean isValidBST(TreeNode root) {
-        return isValid(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        return helper (root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
-    public boolean isValid(TreeNode root, int min, int max) {
-        return root==null || root.val>=min
-        && root.val<=max 
-        && isValid(root.left, min, root.val-1) 
-        && isValid(root.right, root.val+1, max);
+    public boolean helper(TreeNode root, int min, int max) {
+        if (root==null) return true;
+        if (root.val<min) return false;
+        if (root.val>max) return false;
+        if (root.val==Integer.MIN_VALUE) {
+            return root.left==null && helper(root.right, root.val+1, max);
+        }
+        if (root.val==Integer.MAX_VALUE) {
+            return helper(root.left, min, root.val-1) && root.right==null;
+        }
+        return helper(root.left, min, root.val-1) && helper(root.right, root.val+1, max);
     }
 }
+
+Solution 2 inOrderTraversal
+public class Solution {
+    public boolean isValidBST(TreeNode root) {
+        int val = Integer.MIN_VALUE;
+        boolean first = true;
+        TreeNode cur = root;
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        while (cur!=null || !stack.isEmpty()) {
+            if (cur!=null) {
+                stack.push(cur);
+                cur = cur.left;
+            } else {
+                cur = stack.pop();
+                if (val>=cur.val) {
+                    if (val==Integer.MIN_VALUE && first) {
+                        first = false;
+                    } else {
+                        return false;
+                    }
+                }
+                val = cur.val;
+                cur = cur.right;
+            }
+        }
+        return true;
+    }
+}
+
+Wrong Solution
+1. Recursion，是 [min,max] 而不是 (min,max), (min,max], [min,max)
+2. root.val 不能 -1 或者 +1 的情况
+   return helper(root.left, min, root.val-1) && helper(root.right, root.val+1, max); 
