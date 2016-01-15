@@ -35,7 +35,7 @@ public class Solution {
     }
 }
 
-Solution 2 inOrderTraversal
+Solution 2.1 inOrderTraversal
 public class Solution {
     public boolean isValidBST(TreeNode root) {
         int val = Integer.MIN_VALUE;
@@ -57,6 +57,48 @@ public class Solution {
                 }
                 val = cur.val;
                 cur = cur.right;
+            }
+        }
+        return true;
+    }
+}
+
+Solution 2.2 inOrderTraversal without Stack
+public class Solution {
+    public boolean isValidBST(TreeNode root) {
+        // LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+        TreeNode cur = root;
+        TreeNode pre = null;
+        int min = Integer.MIN_VALUE;
+        while (cur != null) {
+            pre = cur.left;
+            if (pre == null) {
+                if (cur.val < min) {
+                    return false;
+                }
+                if (cur.val == Integer.MAX_VALUE) {
+                    return cur.right == null;
+                }
+                min = cur.val + 1;
+                cur = cur.right;
+            } else {
+                while (pre.right != null && pre.right != cur) {
+                    pre = pre.right;
+                }
+                if (pre.right == null) {
+                    pre.right = cur;
+                    cur = cur.left;
+                } else {
+                    if (cur.val < min) {
+                        return false;
+                    }
+                    if (cur.val == Integer.MAX_VALUE) {
+                        return cur.right == null;
+                    }
+                    min = cur.val + 1;
+                    pre.right = null;
+                    cur = cur.right;
+                }
             }
         }
         return true;
