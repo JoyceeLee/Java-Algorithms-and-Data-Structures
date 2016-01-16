@@ -5,22 +5,21 @@
 
 public class Solution {
     public boolean isValid(String s) {
-        Stack<Character> st = new Stack<Character>();
-        for(int i=0; i<s.length(); i++) {
-            Character c = s.charAt(i);
-            if(c=='(' || c=='{' || c=='[') {
-                st.push(c);
+        LinkedList<Character> stack = new LinkedList<Character>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(' || c == '[' || c == '{') {
+                stack.push(c); 
             } else {
-                if(st.isEmpty()) return false;
-                Character cc = st.pop();
+                if(stack.isEmpty()) return false;
+                char cc = stack.pop();
                 switch(c) {
-                    case ')' :  if(cc!='(') return false; break; 
+                    case ')' :  if(cc!='(') return false; break; // Do not forget break
                     case ']' :  if(cc!='[') return false; break; 
                     case '}' :  if(cc!='{') return false; break; 
                 }
             }
         }
-        if(!st.isEmpty()) return false;
-        return true;
+        return stack.isEmpty();
     }
 }
