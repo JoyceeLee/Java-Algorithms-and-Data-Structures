@@ -7,9 +7,27 @@
 * 
 * Input: numbers={2, 7, 11, 15}, target=9
 * Output: index1=1, index2=2
-* /
+*/
+Solution 1 Hashtable
+import java.util.Hashtable;
+public class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] ret = new int[2];
+        Hashtable<Integer,  Integer> ht = new Hashtable<Integer, Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            if (ht.containsKey(nums[i])) {
+                ret[0] = ht.get(nums[i]);
+                ret[1] = i + 1;
+                break;
+            } else {
+                ht.put(target - nums[i], i + 1);
+            }
+        }
+        return ret;
+    }
+}
 
-
+Solution 2 two pointer
 public class Solution {
     public int[] twoSum(int[] numbers, int target) {
         int[] ret = {-1, -1};
