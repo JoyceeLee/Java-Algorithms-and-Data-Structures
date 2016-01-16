@@ -19,22 +19,23 @@
 *   [1,2],
 *   []
 * ]
-* /
+*/
 
 
 public class Solution {
-    public List<List<Integer>> subsets(int[] S) {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> list = new ArrayList<List<Integer>>();
         List<Integer> tmp = new ArrayList<Integer>();
-        List<List<Integer>> ret = new ArrayList<List<Integer>>();
-        Arrays.sort(S);
-        dfs(ret, tmp, S, 0);
-        return ret;
+        Arrays.sort(nums);
+        helper(list, tmp, nums, 0);
+        return list;
     }
-    public void dfs(List<List<Integer>> ret, List<Integer> tmp, int[] S, int start) {
-        ret.add(new ArrayList<Integer>(tmp));
-        for(int i=start; i<S.length; i++) {
-            tmp.add(S[i]);
-            dfs(ret, tmp, S, i+1);
+    public void helper(List<List<Integer>> list, List<Integer> tmp, int[] nums, int start) {
+        list.add(new ArrayList<Integer>(tmp));
+
+        for (int i=start; i<nums.length; i++) {
+            tmp.add(nums[i]);
+            helper(list, tmp, nums, i+1);
             tmp.remove(tmp.size()-1);
         }
     }
