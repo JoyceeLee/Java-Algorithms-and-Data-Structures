@@ -1,0 +1,33 @@
+/**
+ *
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+        int alen = length(headA);
+        int blen = length(headB);
+        while (alen > blen) {
+            headA = headA.next;
+            alen--;
+        }
+        while (blen > alen) {
+            headB = headB.next;
+            blen--;
+        }
+        while (headA != headB && headA != null && headB != null) {
+            headA = headA.next;
+            headB = headB.next;
+        }
+        return headA;
+    }
+    
+    public int length(ListNode head) {
+        ListNode run = head;
+        int i = 0;
+        while (run != null) {
+            run = run.next;
+            i++;
+        }
+        return i;
+    }
+}
