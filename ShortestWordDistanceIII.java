@@ -1,4 +1,5 @@
 /**
+ * This is a follow up of Shortest Word Distance. The only difference is now word1 could be the same as word2.
  */
 public class Solution {
     public int shortestWordDistance(String[] words, String word1, String word2) {
