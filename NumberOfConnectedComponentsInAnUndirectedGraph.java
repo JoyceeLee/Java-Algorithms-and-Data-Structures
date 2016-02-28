@@ -20,6 +20,7 @@ You can assume that no duplicate edges will appear in edges. Since all edges are
 Solution 1. Union Find
 public class Solution {
     public int countComponents(int n, int[][] edges) {
+        if (n <= 1) return n; 
         int[] root = new int[n];
         for (int i = 0; i < n; i++) {
             root[i] = i;
@@ -40,5 +41,39 @@ public class Solution {
             i = root[i];
         }
         return i;
+    }
+}
+
+
+Solution 2. DFS
+public class Solution {
+    public int countComponents(int n, int[][] edges) {
+        if (n <= 1) return n;
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            map.put(i, new LinkedList<Integer>());
+        }
+        for (int[] edge : edges) {
+            map.get(edge[0]).add(edge[1]);
+            map.get(edge[1]).add(edge[0]);
+        }
+        
+        Set<Integer> visited = new HashSet<Integer>();
+        
+        int cnt = 0; 
+        for (int i = 0; i < n; i++) {
+            if (visited.add(i)) {
+                dfsFind(i, visited, map);
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+    private void dfsFind(int i, Set<Integer>visited, Map<Integer, List<Integer>> map) {
+        for (int j : map.get(i)) {
+            if(visited.add(j)) {
+                dfsFind(j, visited, map);
+            }
+        }
     }
 }
