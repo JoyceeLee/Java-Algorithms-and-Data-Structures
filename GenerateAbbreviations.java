@@ -9,6 +9,25 @@ Given word = "word", return the following list (order does not matter):
 回溯法，这里 cnt 和 str 同时参加回溯
 // 4, 3d, 2r1, 2rd, 1o2, 1o1d, 1or1, 1ord, w3, w2d, w1r1, w1rd, wo2, wo1d, wor1, word
 
+思路
+public class Solution {
+    public List<String> generateAbbreviations(String word){
+        List<String> ret = new ArrayList<String>();
+        backtrack(ret, word, 0, "", 0);
+        return ret;
+    }
+
+    private void backtrack(List<String> ret, String word, int pos, String cur, int count){
+        if(pos==word.length()){
+            if(count > 0) cur += count;
+            ret.add(cur);
+            return;
+        }
+        backtrack(ret, word, pos + 1, cur, count + 1);
+        backtrack(ret, word, pos+1, cur + (count>0 ? count : "") + word.charAt(pos), 0);
+    }
+}
+
 Solution 1 
 public class Solution {
     public List<String> generateAbbreviations(String word) {
