@@ -89,4 +89,4 @@ public class SegmentTree {
 /*
  * Other Usage of Segmengt Tree
  * Range Minimum/Maximum Query
- *
+ */
