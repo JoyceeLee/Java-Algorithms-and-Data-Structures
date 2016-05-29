@@ -11,6 +11,7 @@
  */
  
  // Solution 1. Binary Search Tree
+ /* avg O(n log n), worst O(n^2) */
  public class Solution {
     class Node {
         int count; // number of values <= this.val
@@ -68,6 +69,7 @@
 }
 
 // Solution 2. Divide and Conquer - Merge Sort
+/* O(n log n) */
 public class Solution {
     class Pair {
         int idx;
