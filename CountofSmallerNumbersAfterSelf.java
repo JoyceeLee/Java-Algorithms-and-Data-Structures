@@ -67,7 +67,56 @@
     }
 }
 
-// Solution 2. Binary Indexed Tree
+// Solution 2. Divide and Conquer - Merge Sort
+public class Solution {
+    class Pair {
+        int idx;
+        int val;
+        public Pair(int idx, int val) {
+            this.idx = idx;
+            this.val = val;
+        }
+        
+    }
+    public List<Integer> countSmaller(int[] nums) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        if (nums == null || nums.length == 0) return list;
+        
+        Pair[] pairs = new Pair[nums.length];
+        for (int i = 0; i < nums.length; i++)
+            pairs[i] = new Pair(i, nums[i]);
+        Integer[] smaller = new Integer[nums.length]; // before fill, smaller[i] is empty
+        Arrays.fill(smaller, 0);
+        countWhileMergeSort(pairs, smaller, 0, pairs.length);
+        
+        list.addAll(Arrays.asList(smaller));
+        return list;
+    }
+    
+    private void countWhileMergeSort(Pair[] pairs, Integer[] smaller, int start, int end) {
+        if (start + 1 >= end) return;
+        int mid = (end - start) / 2 + start;
+        countWhileMergeSort(pairs, smaller, start, mid);
+        countWhileMergeSort(pairs, smaller, mid, end);
+        
+        Pair[] tmp = new Pair[end - start];
+        int id = 0;
+        int i = start, j = mid;
+        int count = 0;
+        for (; i < mid; i++) {
+            while (j < end && pairs[i].val > pairs[j].val) {
+                count++;
+                tmp[id++] = pairs[j++];
+            }
+            smaller[pairs[i].idx] += count;
+            tmp[id++] = pairs[i];
+        }
+        System.arraycopy(tmp, 0, pairs, start, id);
+    }
+}
+
+// Solution 3. Binary Indexed Tree
+// In the case of [2147483647,-2147483648,-1,0], there will be error: java.lang.ArrayIndexOutOfBoundsException: -2147483647
 public class Solution {
     public List<Integer> countSmaller(int[] nums) {
         LinkedList<Integer> list = new LinkedList<Integer>();
