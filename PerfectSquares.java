@@ -11,6 +11,7 @@ public class Solution {
         Arrays.fill(dp, Integer.MAX_VALUE);
         dp[0] = 0;
         for (int i = 1; i <= n; i++) {
+            // double to int, convert
             int sqrt = (int) Math.sqrt(i);
             if (i == sqrt * sqrt) {
                 dp[i] = 1;
@@ -25,6 +26,8 @@ public class Solution {
 
 // Static DP solution
 public class Solution {
+    // 1. static key word
+    // 2. ArrayList--get time is O(1); LinkedList--get time is O(n)
     public static List<Integer> dp = new ArrayList<Integer>();
     
     public int numSquares(int n) {
