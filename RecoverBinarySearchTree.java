@@ -15,6 +15,8 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
+// Solution 1. Recursion
 public class Solution {
     TreeNode first = null;
     TreeNode second = null;
@@ -42,5 +44,51 @@ public class Solution {
         }
         last = root;
         inorder(root.right);
+    }
+}
+
+// Solution 2. Morris Traversal
+public class Solution {
+    public void recoverTree(TreeNode root) {
+        TreeNode cur = root;
+        TreeNode pre = null;
+        TreeNode link = null;
+        TreeNode n1 = null, n2 = null;
+        
+        while (cur != null) {
+            if (cur.left != null) {
+                link = cur.left;
+                while (link.right != null && link.right != cur) {
+                    link = link.right;
+                }
+                if (link.right == null) {
+                    link.right = cur;
+                    cur = cur.left;
+                } else {
+                    link.right = null;
+                    if (pre != null && pre.val >= cur.val) {
+                        if (n1 == null) {
+                            n1 = pre;
+                        }
+                        n2 = cur;
+                    }
+                    pre = cur; // visit
+                    cur = cur.right;
+                }
+            } else {
+                if (pre != null && pre.val >= cur.val) {
+                    if (n1 == null) {
+                        n1 = pre;
+                    }
+                    n2 = cur;
+                }
+                pre = cur; // visit
+                cur = cur.right;
+            }
+        }
+        
+        int swap = n1.val;
+        n1.val = n2.val;
+        n2.val = swap;
     }
 }
