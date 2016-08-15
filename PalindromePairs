@@ -1,0 +1,94 @@
+/*
+Given a list of unique words. Find all pairs of distinct indices (i, j) in the given list, so that the concatenation of the two words, i.e. words[i] + words[j] is a palindrome.
+
+Example 1:
+Given words = ["bat", "tab", "cat"]
+Return [[0, 1], [1, 0]]
+The palindromes are ["battab", "tabbat"]
+
+Example 2:
+Given words = ["abcd", "dcba", "lls", "s", "sssll"]
+Return [[0, 1], [1, 0], [3, 2], [2, 4]]
+The palindromes are ["dcbaabcd", "abcddcba", "slls", "llssssll"]
+*/
+
+public class Solution {
+    class TrieNode {
+        TrieNode[] children;
+        int index;
+        List<Integer> suffixPalin;
+        public TrieNode() {
+            this.children = new TrieNode[26];
+            this.index = -1;
+            this.suffixPalin = new ArrayList<Integer>();
+        }
+    }
+    
+    public List<List<Integer>> palindromePairs(String[] words) {
+        List<List<Integer>> list = new ArrayList<List<Integer>>();
+        
+        TrieNode root = new TrieNode();
+        List<Integer> empty = new ArrayList<Integer>();
+        
+        for (int i = 0; i < words.length; i++) {
+            if (words[i] == null || words[i].length() == 0) {
+                empty.add(i);
+                continue;
+            }
+            buildTrie(root, words[i], i);
+        }
+        
+        for (int i = 0; i < words.length; i++) {
+            searchPair(root, words[i], i, list, empty);
+        }
+        return list;
+    }
+    
+    private void searchPair(TrieNode root, String word, int idx, List<List<Integer>> list, List<Integer> empty) {
+        char[] wd = word.toCharArray();
+        TrieNode cur = root;
+        
+        for (int i = wd.length - 1; i >= 0; i--) {
+            if (cur.index != -1 && isPalin(wd, 0, i)) {
+                list.add(Arrays.asList(cur.index, idx)); // easy way to add list
+            }
+            if (cur.children[wd[i] - 'a'] == null) {
+                return;
+            }
+            cur = cur.children[wd[i] - 'a'];
+        }
+        
+        for (Integer in : cur.suffixPalin) {
+            if (in != idx) {
+                list.add(Arrays.asList(in, idx));
+            } else {
+                for (Integer em : empty) {
+                    list.add(Arrays.asList(em, idx));
+                    list.add(Arrays.asList(idx, em));
+                }
+            }
+        }
+    }
+    
+    private void buildTrie(TrieNode root, String word, int idx) {
+        char[] wd = word.toCharArray();
+        TrieNode cur = root;
+        for (int i = 0; i < wd.length; i++) {
+            if (cur.children[wd[i] - 'a'] == null) {
+                cur.children[wd[i] - 'a'] = new TrieNode();
+            }
+            cur = cur.children[wd[i]  - 'a'];
+            if (isPalin(wd, i + 1, wd.length - 1)) { // Add the word itself to the list to the list
+                cur.suffixPalin.add(idx);
+            }
+        }
+        cur.index = idx;
+    }
+    
+    private boolean isPalin(char[] wd, int i, int j) {
+        while (i < j) {
+            if (wd[i++] != wd[j--]) return false;
+        }
+        return true;
+    }
+}
