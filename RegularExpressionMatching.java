@@ -62,6 +62,21 @@ public class Solution {
 * Time Complexity : O(m*n)
 * Space Complexity : O(m*n)
 */
+/*
+* To get s(0,i) = p(0,j), the transfer function are
+* 1. If p(j) = '*' && p(j-1) != '.', s(0,i) = p(0,j) when
+*    i.   s(0,i) = p(0,j-1)
+*    ii.  s(0,i) = p(0,j-2)
+*    iii. s(0,i-1) = p(0,j) && i>0 && s(i) = s(i-1) && s(i-1) == p(j-1)
+*
+* 2. If p(j) = '*' && p(j-1) = '.', s(0,i) = p(0,j) when
+*    i.   s(0,i) = p(0,j-1)
+*    ii.  s(0,i) = p(0,j-2)
+*    iii. s(0,i-1) = p(0,j)
+*
+* 3. If p(j) != '*', s(0,i) = p(0,j) when
+*    i.   s(0,i-1) = p(0,j-1) && (s(i) = p(j) || p(j) = '.')
+*/
 public class Solution {
     public boolean isMatch(String s, String p) {  
         if(p.length()==0)  
